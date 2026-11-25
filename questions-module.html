@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Questions on TD: Globe quote page module</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Source+Serif+4:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: #ffffff;
+    color: #1a1a1a;
+    font-family: Roboto, Arial, sans-serif;
+  }
+  .qm {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 40px 20px;
+  }
+
+  /* Header */
+  .qm-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px 16px;
+    border-bottom: 2px solid #1a1a1a;
+    padding-bottom: 10px;
+  }
+  .qm-title {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 700;
+  }
+  .qm-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .qm-tag {
+    font-size: 12px;
+    color: #595959;
+  }
+  .qm-brand {
+    display: inline-flex;
+    align-items: center;
+    min-height: 24px;
+    padding: 0 11px;
+    background: #13215e;
+    border: 1px solid #ffffff;
+    outline: 1px solid #13215e;
+    border-radius: 3px;
+    color: #ffffff;
+    font-size: 9px;
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .qm-brand:hover { background: #1d2f80; }
+  .qm-brand:focus-visible { outline: 3px solid #4a7bd0; outline-offset: 2px; }
+
+  /* Accordion */
+  .qm-item { border-bottom: 1px solid #d8d8d8; }
+  .qm-q {
+    width: 100%;
+    min-height: 44px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    padding: 22px 4px;
+    background: none;
+    border: 0;
+    color: #1a1a1a;
+    text-align: left;
+    cursor: pointer;
+    font: inherit;
+  }
+  .qm-q:focus-visible { outline: 3px solid #4a7bd0; outline-offset: -3px; }
+  .qm-q-text {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 1.25;
+  }
+  .qm-icon { flex: none; }
+  .qm-icon .v { transition: opacity 0.15s; }
+  .qm-q[aria-expanded="true"] .qm-icon .v { opacity: 0; }
+
+  .qm-panel { padding: 0 4px 26px; }
+  .qm-panel[hidden] { display: none; }
+  .qm-answer {
+    margin: 0;
+    max-width: 760px;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* Registration gate */
+  .qm-teaser {
+    margin: 0;
+    max-width: 760px;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #757575;
+  }
+  .qm-gate {
+    margin-top: 16px;
+    max-width: 560px;
+    padding: 24px;
+    background: #fafafa;
+    border: 1px solid #d8d8d8;
+    border-top: 4px solid #c8102e;
+  }
+  .qm-gate h3 {
+    margin: 0;
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 1.25;
+  }
+  .qm-gate p {
+    margin: 8px 0 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #4a4a4a;
+  }
+  .qm-form {
+    margin-top: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .qm-form label { font-size: 13px; font-weight: 500; }
+  .qm-row { display: flex; gap: 8px; flex-wrap: wrap; }
+  .qm-row input {
+    flex: 1 1 240px;
+    min-width: 0;
+    height: 44px;
+    padding: 0 12px;
+    border: 1px solid #8a8a8a;
+    border-radius: 4px;
+    font: 15px Roboto, Arial, sans-serif;
+  }
+  .qm-row button {
+    height: 44px;
+    padding: 0 22px;
+    background: #1a1a1a;
+    color: #ffffff;
+    border: 0;
+    border-radius: 4px;
+    font: 700 15px Roboto, Arial, sans-serif;
+    cursor: pointer;
+  }
+  .qm-login {
+    margin-top: 14px;
+    font-size: 13px;
+    color: #4a4a4a;
+  }
+  .qm-login a { color: #0b5394; font-weight: 700; }
+
+  @media (max-width: 520px) {
+    .qm-q-text { font-size: 18px; }
+    .qm-meta { width: 100%; justify-content: space-between; }
+  }
+</style>
+</head>
+<body>
+
+<section class="qm" aria-labelledby="qm-title">
+  <div class="qm-head">
+    <h2 class="qm-title" id="qm-title">Questions on TD</h2>
+    <div class="qm-meta">
+      <span class="qm-tag">Using AI to read the news.</span>
+      <a class="qm-brand" href="https://www.stockcalc.com" target="_blank" rel="noopener">www.stockcalc.com</a>
+    </div>
+  </div>
+
+  <!-- Q1: free answer, open by default -->
+  <div class="qm-item">
+    <button class="qm-q" aria-expanded="true" aria-controls="qm-p1" id="qm-b1">
+      <span class="qm-q-text">Is TD still undervalued after its 254% rally?</span>
+      <svg class="qm-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#1a1a1a" stroke-width="2" aria-hidden="true"><path d="M2 9h14"/><path class="v" d="M9 2v14"/></svg>
+    </button>
+    <div class="qm-panel" id="qm-p1" role="region" aria-labelledby="qm-b1">
+      <p class="qm-answer">TD shares trade at 18.8 times earnings with a 2.55% dividend yield, just below their 52-week high of $179.80. Coverage over the past month has centred on the dividend and the share buyback program approved on Oct. 8. The next test is quarterly earnings on Dec. 3, which will show whether profit growth supports the current price.</p>
+    </div>
+  </div>
+
+  <!-- Q2: registration gate -->
+  <div class="qm-item">
+    <button class="qm-q" aria-expanded="false" aria-controls="qm-p2" id="qm-b2">
+      <span class="qm-q-text">Can TD sustain its strong return on equity?</span>
+      <svg class="qm-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#1a1a1a" stroke-width="2" aria-hidden="true"><path d="M2 9h14"/><path class="v" d="M9 2v14"/></svg>
+    </button>
+    <div class="qm-panel" id="qm-p2" role="region" aria-labelledby="qm-b2" hidden>
+      <p class="qm-teaser">This answer draws on TD's last four quarterly results, analyst notes and recent coverage of the bank's capital plans...</p>
+      <div class="qm-gate">
+        <h3>Register for free to read this answer</h3>
+        <p>Get full answers to every question on Globe quote pages, and save stocks to your Watchlist.</p>
+        <form class="qm-form" onsubmit="return false;">
+          <label for="qm-email-2">Email address</label>
+          <div class="qm-row">
+            <input id="qm-email-2" type="email" placeholder="you@example.com" autocomplete="email">
+            <button type="submit">Continue</button>
+          </div>
+        </form>
+        <div class="qm-login">Already registered? <a href="#">Log in</a></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q3: registration gate -->
+  <div class="qm-item">
+    <button class="qm-q" aria-expanded="false" aria-controls="qm-p3" id="qm-b3">
+      <span class="qm-q-text">Will wealth management drive CIBC's next growth phase?</span>
+      <svg class="qm-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#1a1a1a" stroke-width="2" aria-hidden="true"><path d="M2 9h14"/><path class="v" d="M9 2v14"/></svg>
+    </button>
+    <div class="qm-panel" id="qm-p3" role="region" aria-labelledby="qm-b3" hidden>
+      <p class="qm-teaser">This answer draws on CIBC's latest results, analyst notes and recent coverage of its wealth business...</p>
+      <div class="qm-gate">
+        <h3>Register for free to read this answer</h3>
+        <p>Get full answers to every question on Globe quote pages, and save stocks to your Watchlist.</p>
+        <form class="qm-form" onsubmit="return false;">
+          <label for="qm-email-3">Email address</label>
+          <div class="qm-row">
+            <input id="qm-email-3" type="email" placeholder="you@example.com" autocomplete="email">
+            <button type="submit">Continue</button>
+          </div>
+        </form>
+        <div class="qm-login">Already registered? <a href="#">Log in</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // One panel open at a time. Clicking an open question closes it.
+  var buttons = document.querySelectorAll('.qm-q');
+  buttons.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var wasOpen = btn.getAttribute('aria-expanded') === 'true';
+      buttons.forEach(function (b) {
+        b.setAttribute('aria-expanded', 'false');
+        document.getElementById(b.getAttribute('aria-controls')).hidden = true;
+      });
+      if (!wasOpen) {
+        btn.setAttribute('aria-expanded', 'true');
+        document.getElementById(btn.getAttribute('aria-controls')).hidden = false;
+      }
+    });
+  });
+  document.querySelectorAll('.qm-login a').forEach(function (a) {
+    a.addEventListener('click', function (e) { e.preventDefault(); });
+  });
+</script>
+</body>
+</html>
